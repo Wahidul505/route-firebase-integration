@@ -1,8 +1,9 @@
 import React from 'react';
-import useFirebase from '../../hooks/useFirebase';
+import {useSignInWithGoogle} from 'react-firebase-hooks/auth';
+import { auth } from '../../firebase.init';
 
 const Register = () => {
-    const {googleSignIn} = useFirebase();
+    const [signInWithGoogle, user] = useSignInWithGoogle(auth);
     const handleSubmit = e =>{
         e.preventDefault();
     }
@@ -19,7 +20,7 @@ const Register = () => {
                 <label className='text-xl text-gray-600'>Confirm Password</label>
                 <input className='border border-gray-500 p-1 rounded mb-4' type="password" placeholder='Confirm Password' />
                 <button className='bg-gray-600 text-white p-2 rounded mb-4' type="submit">Register</button>
-                <button onClick={googleSignIn} className='bg-gray-600 text-white p-2 rounded'>Sign In With Google</button>
+                <button onClick={()=>signInWithGoogle()} className='bg-gray-600 text-white p-2 rounded'>Sign In With Google</button>
             </form>
         </div>
     );
